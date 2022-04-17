@@ -1,5 +1,5 @@
 import streamlit as st
-from clf1 import predict
+#from clf1 import predict
 
 # streamlit run app.py
 st.set_option("deprecation.showfileUploaderEncoding", False)
@@ -13,7 +13,7 @@ if text is not None:
 
     st.write("")
     st.write("Just a second...")
-    recommendation = predict(UserId)
+    #recommendation = predict(UserId)
 
 
-    st.write("top_5_recommendation:", recommendation)
+    st.write("top_5_recommendation:", "1,1,1")
