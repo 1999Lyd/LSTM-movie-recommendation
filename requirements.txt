@@ -1,1 +1,6 @@
-streamlit
+numpy
+pandas
+torch
+flask
+requests
+gunicorn
