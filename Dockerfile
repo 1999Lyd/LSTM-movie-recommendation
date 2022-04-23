@@ -2,7 +2,8 @@ FROM python:3.7
 
 # Create working directory
 WORKDIR /app
-
+ADD https://storage.googleapis.com/lyd990404.appspot.com/allrev.csv /app
+ADD https://storage.googleapis.com/lyd990404.appspot.com/fullmodel.pt /app
 # Copy requirements.txt file
 COPY requirements.txt ./requirements.txt
 
