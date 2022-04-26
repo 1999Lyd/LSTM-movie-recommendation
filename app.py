@@ -1,29 +1,52 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
-import json
-import torch
-from base64 import b64encode
-import os
+import streamlit as st
 from clf1 import predict
-from model import LSTMRating
-from generate_html import generate_html, get_count_html
+import torch
 import torch.nn as nn
-
+from model import LSTMRating
+# streamlit run app.py
 import __main__
 
 __main__.LSTMRating = LSTMRating
 
+class LSTMRating(nn.Module):
 
-app = Flask(__name__)
+    def __init__(self, embedding_dim, hidden_dim, num_items, num_output,device):
+        super().__init__()
+        self.hidden_dim = hidden_dim
+        self.item_embeddings = nn.Embedding(num_items, embedding_dim)
+        self.lstm = nn.LSTM(embedding_dim, hidden_dim)
+        self.linear = nn.Linear(hidden_dim, num_output)
+        self.hidden = self.init_hidden(device)
+
+    def init_hidden(self,device):
+    	# initialize both hidden layers
+        return (Variable(torch.zeros(1, 1, self.hidden_dim).to(device)),
+                Variable(torch.zeros(1, 1, self.hidden_dim)).to(device))
+
+    def forward(self, sequence):
+        embeddings = self.item_embeddings(sequence)
+        output, self.hidden = self.lstm(embeddings.view(len(sequence), 1, -1),
+                                        self.hidden)
+        rating_scores = self.linear(output.view(len(sequence), -1))
+        return rating_scores
+
+    def predict(self, sequence):
+        rating_scores = self.forward(sequence)
+        return rating_scores
+
+
+st.set_option("deprecation.showfileUploaderEncoding", False)
+
+st.title("LSTM recommendation system")
+st.write("")
 model = torch.load('fullmodel.pt',map_location = torch.device("cpu"))
-@app.route('/', methods=['POST', 'GET'])
-def get_data():
-    if request.method == 'POST':
-        userId = request.form['search']
-        # if search button hit, call the function get_image_class
-        one, two, three, four, five = predict(userId, model)
+UserId = st.text_input("please input your User Id",value = None)
 
-        return render_template('reclist.html', one=one, two=two, three=three, four=four, five=five)
-    return render_template('home.html')
+if UserId is not None:
 
-if __name__ == '__main__' :
-    app.run(host='127.0.0.1', port=8080, debug=True)
+    st.write("")
+    st.write("Just a second...")
+    recommendation = predict(UserId,model)
+
+
+    st.write("top_5_recommendation:", recommendation)
