@@ -12,7 +12,7 @@ def predict(UserId,model):
     n_items = df['ProductId'].max() + 1
     score_df = pd.DataFrame(columns=['ProdId', 'Score'])
 
-    for i in range(10000):
+    for i in range(20000):
         pseq.append(i)
 
         tensor_seq = Variable(torch.LongTensor(np.array(pseq).astype('int64')))
@@ -26,11 +26,7 @@ def predict(UserId,model):
         score_df = score_df.append(sub1)
     score_df = score_df.sort_values(by="Score", ascending=False)
     top_5_list = score_df.head()['ProdId'].values
-    one = top_5_list[0]
-    two = top_5_list[1]
-    three = top_5_list[2]
-    four = top_5_list[3]
-    five = top_5_list[4]
+ 
+    return top_5_list
 
-    return one, two, three, four, five
 
