@@ -6,6 +6,7 @@
 ```python main.py```
 to train the model, model will be saved in "models" folder.
 ## Demo application
+- application is available on [Google Cloud](https://lyd990404.ue.r.appspot.com/)
 - download the [dataset](https://storage.googleapis.com/lyd990404.appspot.com/allrev.csv) and [model](https://storage.googleapis.com/lyd990404.appspot.com/fullmodel.pt) to the home directory
 - run the application directly by Dockerfile: 
 ``` 
