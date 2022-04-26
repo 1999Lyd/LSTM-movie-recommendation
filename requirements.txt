@@ -1,6 +1,5 @@
 numpy
 pandas
 torch
-flask
-requests
-gunicorn
+streamlit
+torchtext
