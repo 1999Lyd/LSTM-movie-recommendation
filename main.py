@@ -1,9 +1,3 @@
-import string
-import time
-import copy
-from sklearn.linear_model import LogisticRegression
-import urllib.request
-import zipfile
 
 import torch
 from model import LSTMRating
