@@ -4,7 +4,7 @@ from torch.autograd import Variable
 import math
 
 class lstm_from_scratch(nn.Module):
-    def __init__(self, input_sz: int, hidden_sz: int):
+    def __init__(self, input_sz, hidden_sz):
         super().__init__()
         self.input_size = input_sz
         self.hidden_size = hidden_sz
@@ -49,11 +49,22 @@ class lstm_from_scratch(nn.Module):
         for t in range(seq_sz):
             x_t = x[t, :, :]
             
+            # input gate layer(filter)
             i_t = torch.sigmoid(x_t @ self.W_i + h_t @ self.U_i + self.b_i)
+            
+            # forget gate layer(filter)
             f_t = torch.sigmoid(x_t @ self.W_f + h_t @ self.U_f + self.b_f)
+            
+            # input new feature vector
             g_t = torch.tanh(x_t @ self.W_c + h_t @ self.U_c + self.b_c)
+            
+            # output gate layer(filter)
             o_t = torch.sigmoid(x_t @ self.W_o + h_t @ self.U_o + self.b_o)
+            
+            # cell state generation
             c_t = f_t * c_t + i_t * g_t
+            
+            # hidden state and output generation
             h_t = o_t * torch.tanh(c_t)
             
             hidden_seq.append(h_t.unsqueeze(0))
