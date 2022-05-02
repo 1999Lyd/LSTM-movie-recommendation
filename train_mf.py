@@ -96,9 +96,11 @@ def train_model(model, criterion, optimizer, dataloaders, device, num_epochs=5, 
 
   
 dataloaders = {'train':trainloader, 'val':valloader}
-n_users = X.loc[:,'UserId'].max()+1
-n_items = X.loc[:,'ProductId'].max()+1
-model = MFRecommender(n_users,n_items,embedding_dim_users=50, embedding_dim_items=50, n_activations = 100,rating_range=[0.,5.])
+
+n_users = X.loc[:,'userId'].max()+1 # ID value range of users
+n_items = X.loc[:,'movieId'].max()+1 # ID value range of movies
+model = PMFRecommender(n_users,n_items,embedding_dim=50,rating_range=[0.,5.])
+
 criterion = nn.MSELoss()
 lr=0.001
 n_epochs=10
