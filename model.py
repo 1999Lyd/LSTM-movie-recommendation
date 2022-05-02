@@ -95,7 +95,7 @@ class LSTMRating(nn.Module):
         
         # create embeddings for every item in a sequence
         embeddings = self.item_embeddings(sequence)
-        output, self.hidden = self.lstm.forward(embeddings.view(len(sequence), 1, -1),
+        output, self.hidden = self.lstm(embeddings.view(len(sequence), 1, -1),
                                         self.hidden)
         rating_scores = self.linear(output.view(len(sequence), -1))
         return rating_scores
