@@ -92,6 +92,7 @@ class LSTMRating(nn.Module):
                 Variable(torch.zeros(1, 1, self.hidden_dim)).to(device))
 
     def forward(self, sequence):
+        
         # create embeddings for every item in a sequence
         embeddings = self.item_embeddings(sequence)
         output, self.hidden = self.lstm.forward(embeddings.view(len(sequence), 1, -1),
