@@ -2,7 +2,7 @@ import streamlit as st
 from clf1 import predict
 import torch
 import torch.nn as nn
-from model import LSTMRating
+from model import LSTMRating, lstm_from_scratch
 # streamlit run app.py
 import __main__
 
@@ -14,7 +14,7 @@ class LSTMRating(nn.Module):
         super().__init__()
         self.hidden_dim = hidden_dim
         self.item_embeddings = nn.Embedding(num_items, embedding_dim)
-        self.lstm = nn.LSTM(embedding_dim, hidden_dim)
+        self.lstm = lstm_from_scratch(embedding_dim, hidden_dim)
         self.linear = nn.Linear(hidden_dim, num_output)
         self.hidden = self.init_hidden(device)
 
