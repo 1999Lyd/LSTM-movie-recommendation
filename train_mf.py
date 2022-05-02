@@ -4,7 +4,7 @@ import pandas as pd
 import torch.optim as optim
 import torch.nn.functional as F
 import zipfile
-from mf_model import NNColabFiltering
+from mf_model import MFRecommender
 import torch
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader,TensorDataset
