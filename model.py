@@ -35,7 +35,7 @@ class lstm_from_scratch(nn.Module):
     def init_weights(self):
         stdv = 1.0 / math.sqrt(self.hidden_size)
         for weight in self.parameters():
-            weight.data.randn(-stdv, stdv)
+            weight.data.uniform_(-stdv, stdv)
     
     def forward(self,
                 x,
