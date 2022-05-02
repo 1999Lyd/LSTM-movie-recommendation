@@ -4,6 +4,8 @@
 - LSTM achitecture
 - ![1_s7_EO0rjXAw99RnH1x4s_g](https://user-images.githubusercontent.com/87921304/166295541-c4a815a2-0004-4802-8aeb-6eddd902e269.png)
 ## Get started
+- install required package: 
+```pip install -r requirements.txt```
 - run
 ```python main.py```
 to train the model, model will be saved in "models" folder.
