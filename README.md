@@ -1,6 +1,8 @@
 # LSTM-movie-recommendation
 ## introduction
 - Implementation of LSTM on [Amazon movie review](https://data.mendeley.com/datasets/kb5nv7dbtm/1). Explore how time information will influence the recommendation system.
+- LSTM achitecture
+- ![1_s7_EO0rjXAw99RnH1x4s_g](https://user-images.githubusercontent.com/87921304/166295541-c4a815a2-0004-4802-8aeb-6eddd902e269.png)
 ## Get started
 - run
 ```python main.py```
