@@ -86,6 +86,7 @@ class LSTMRating(nn.Module):
         self.hidden = self.init_hidden(device)
 
     def init_hidden(self,device):
+        
     	# initialize both hidden layers
         return (Variable(torch.zeros(1, 1, self.hidden_dim).to(device)),
                 Variable(torch.zeros(1, 1, self.hidden_dim)).to(device))
