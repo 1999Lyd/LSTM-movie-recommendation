@@ -1,4 +1,4 @@
-
+from torch.autograd import Variable
 import torch
 from model import LSTMRating
 from torch.utils.data import DataLoader,TensorDataset
